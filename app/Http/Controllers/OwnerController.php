@@ -45,7 +45,7 @@ class OwnerController extends Controller
             $addApp->save();
 
 
-            return redirect('/super_admin/dashboard/view_app')->with('flash_message_success','You are registered successfully !');
+            return redirect('/super_admin/dashboard/view_app')->with('flash_message_success','Application Uploaded successfully !');
         }
         return view('admin.owner.upload_app');
     }
@@ -54,6 +54,12 @@ class OwnerController extends Controller
     {
         $apps = App::get();
         return view('admin.owner.view_app', compact('apps'));
+    }
+
+    public function deleteApp($id=null)
+    {
+        App::where(['id'=>$id])->delete();
+        return redirect()->back()->with('flash_message_error','App Deleted!');
     }
 
     public function view_user()

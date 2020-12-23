@@ -94,5 +94,5 @@
             <!-- end basic table  -->
         </div>
     </div>
-</div>
+
 @endsection

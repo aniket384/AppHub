@@ -45,7 +45,7 @@ class UploaderController extends Controller
             $addApp->save();
 
 
-            return redirect('/admin/dashboard/view_app')->with('flash_message_success','You are registered successfully !');
+            return redirect('/admin/dashboard/view_app')->with('flash_message_success','Application Uploaded successfully !');
         }
         return view('admin.uploader.upload_app');
     }
