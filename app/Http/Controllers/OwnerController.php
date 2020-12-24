@@ -52,7 +52,7 @@ class OwnerController extends Controller
     
     public function view_app()
     {
-        $apps = App::get();
+        $apps = App::paginate(10);
         return view('admin.owner.view_app', compact('apps'));
     }
 
@@ -77,8 +77,10 @@ class OwnerController extends Controller
 
 
 
-    public function updateStatus(Request $request,$id=null){
-        $data = $request->all();
-        App::where('id',$data['id'])->update(['status'=>$data['status']]);
+    public function updateStatus(Request $request){
+        $app = App::find($request->app_id);
+        $app->status = $request->status;
+        $app->save();
+        return response()->json(['success' => 'Status Changed Successfully!']);
     }
 }

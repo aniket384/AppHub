@@ -23,7 +23,7 @@ class CreateAppsTable extends Migration
             $table->string('owner_email');
             $table->string('owner_number');
             $table->string('image');
-            $table->string('status')->default(1);
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

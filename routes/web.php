@@ -34,7 +34,7 @@ Route::match(['get', 'post'], '/super_admin/dashboard/view_app', 'OwnerControlle
 Route::match(['get', 'post'], '/super_admin/dashboard/view_user', 'OwnerController@view_user');
 Route::match(['get', 'post'], '/super_admin/dashboard/view_messages', 'OwnerController@view_messages');
 Route::match(['get', 'post'], '/super_admin/dashboard/delete_app/{id}', 'OwnerController@deleteApp');
-Route::post('/super_admin/dashboard/update-app-status','OwnerController@updateStatus');
+Route::get('/super_admin/dashboard/update-app-status','OwnerController@updateStatus');
 
 // Uploader Routes:
 Route::match(['get','post'],'/admin/dashboard/upload_app', 'UploaderController@Upload_app');

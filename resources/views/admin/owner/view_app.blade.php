@@ -29,6 +29,10 @@
                         <strong>{!! session('flash_message_success') !!}</strong>
                     </div>
                     @endif
+
+
+
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered first">
@@ -59,8 +63,8 @@
                                         <td>{{$app->owner_email}}</td>
                                         <td>{{$app->owner_number}}</td>
                                         <td>
-                                          Active
-                                      </td>
+                                           <input type="checkbox" class="toggle-class" data-id="{{$app->id}}" data-toggle="toggle" data-style="slow" data-on="Enabled" data-off="Disabled" data-onstyle="success" data-offstyle="danger" {{ $app->status == true ? 'checked' : ''}}>
+                                        </td>
                                         <td>
                                             @if(!empty($app->image))
                                             <img src="{{asset($app->image)}}" style="height: 13%; width:auto;" alt="">
@@ -89,6 +93,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            {{ $apps->links() }}
                         </div>
                     </div>
                 </div>
@@ -99,3 +104,40 @@
     </div>
 @endsection
 
+@push('scripts')
+<script>
+    $(function() {
+      $('#toggle-two').bootstrapToggle({
+        on: 'Enabled',
+        off: 'Disabled'
+      });
+    })
+  </script>
+
+  <script>
+      $('.toggle-class').on('change', function() {
+          var status = $(this).prop('checked') == true ? 1 : 0;
+          
+          var app_id = $(this).data('id');
+          
+          $.ajax({
+              type: 'GET',
+              dataType: 'JSON',
+              url: '/super_admin/dashboard/update-app-status',
+              data: {
+                  'status': status,
+                  'app_id': app_id
+              },
+              success:function(data) {
+                  $('#notifDiv').fadeIn();
+                  $('#notifDiv').css('background', 'green');
+                  $('#notifDiv').text('Status Updated Successfully');
+                  setTimeout(() => {
+                      $('#notifDiv').fadeOut();
+                  });
+              }
+          });
+      });
+  </script>
+
+@endpush
